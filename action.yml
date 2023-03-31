@@ -43,17 +43,15 @@ runs:
     - name: Test Coverage with pytest
       run: ENV='test' pytest --junitxml=result.xml --ignore=app/main --cov-config=.coveragerc --cov-report=xml --cov=. app/
       shell: bash
-
-    - name: list
-      run: |
-        pwd
-        ls -lah
-      shell: bash
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
-        path: |
-          coverage.xml 
-          result.xml
+        path: coverage.xml 
+  
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: result.xml
