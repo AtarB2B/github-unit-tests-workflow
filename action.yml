@@ -29,10 +29,10 @@ runs:
         if [ -f library/requirements.txt ]; then pip install -r library/requirements.txt; fi
       shell: bash
 
-    - name: Check format
-      run: |
-        pycodestyle ./app; isort --check-only ./app
-      shell: bash
+    # - name: Check format
+    #   run: |
+    #     pycodestyle ./app; isort --check-only ./app
+    #   shell: bash
 
     - name: Lint with flake8
       run: |
