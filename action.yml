@@ -2,11 +2,6 @@ name: Run Unit Tests
 
 description: Run Unit Tests
 
-inputs:
-  SSH_PRIV_KEY_LIBRARY:
-    required: true
-    description: SSH Private Key Library
-
 runs:
   using: "composite"
   steps:
