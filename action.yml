@@ -23,6 +23,13 @@ runs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       shell: bash
+
+    - name: Lint with flake8
+      run: |
+        pwd
+        ls -lah
+        ls library/
+      shell: bash  
     
     - name: Test Coverage with pytest
       run: ENV='test' pytest --ignore=app/main --cov-config=.coveragerc --cov-report=html --cov=. app/
