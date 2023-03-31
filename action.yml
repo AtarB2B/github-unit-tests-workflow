@@ -47,11 +47,11 @@ runs:
       shell: bash
     
     - name: Test Coverage with pytest
-      run: ENV='test' pytest --ignore=app/main --ignore=library/ --cov-config=.coveragerc --cov-report=xml --doctest-modules --cov=. app/
+      run: ENV='test' pytest --cov-config=.coveragerc --cov-report=html --cov=. app/
       shell: bash
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
-        name: code-coverage-report
-        path: coverage.xml
+        name: htmlcov
+        path: htmlcov/index.html
