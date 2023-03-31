@@ -36,25 +36,16 @@ runs:
 
     - name: Lint with flake8
       run: |
-        # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       shell: bash
-
-    - name: Lint with flake8
-      run: |
-        pwd
-        ls -lah
-        ls library/
-      shell: bash  
     
     - name: Test Coverage with pytest
-      run: ENV='test' pytest --ignore=app/main --cov-config=.coveragerc --cov-report=html --cov=. app/
+      run: ENV='test' pytest --ignore=app/main --cov-config=.coveragerc --cov-report=xml --cov=. app/
       shell: bash
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
-        name: htmlcov
-        path: htmlcov/index.html
+        name: code-coverage-report
+        path: coverage.xml
