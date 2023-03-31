@@ -16,10 +16,10 @@ runs:
         python-version: "3.10"
         cache: "pip"
 
-    - name: Update Library
-      uses: AtarB2B/github-library-workflow@main
-      with:
-        SSH_PRIV_KEY_LIBRARY: ${{ inputs.SSH_PRIV_KEY_LIBRARY }}
+    # - name: Update Library
+    #   uses: AtarB2B/github-library-workflow@main
+    #   with:
+    #     SSH_PRIV_KEY_LIBRARY: ${{ inputs.SSH_PRIV_KEY_LIBRARY }}
 
     - name: Install dependencies
       run: |
