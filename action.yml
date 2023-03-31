@@ -42,12 +42,8 @@ runs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       shell: bash
     
-    - name: Test with pytest
-      run: ENV='test' pytest --ignore=app/main
-      shell: bash
-    
     - name: Test Coverage with pytest
-      run: ENV='test' pytest --cov-config=.coveragerc --cov-report=html --cov=. app/
+      run: ENV='test' pytest --ignore=app/main --cov-config=.coveragerc --cov-report=html --cov=. app/
       shell: bash
     
     - name: Archive code coverage results
