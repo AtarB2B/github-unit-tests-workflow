@@ -14,12 +14,6 @@ runs:
         npm run testpipeline
       shell: bash
       working-directory: erp
-
-    - name: Test
-      run: |
-        ls -lah
-      shell: bash
-      working-directory: erp
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
