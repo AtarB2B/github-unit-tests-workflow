@@ -7,6 +7,10 @@ runs:
   steps:
     - uses: actions/checkout@v3
     
+    - name: Working directory
+      run: cd erp
+      shell: bash
+
     - name: Test Coverage with jest
       uses: stefanoeb/jest-action@1.0.3
     
