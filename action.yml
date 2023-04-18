@@ -10,7 +10,7 @@ runs:
     - name: Test Coverage with jest
       run: |
         npm install
-        npm test
+        npm testpipeline
       shell: bash
       working-directory: erp
 
