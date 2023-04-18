@@ -8,11 +8,7 @@ runs:
     - uses: actions/checkout@v3
     
     - name: Test Coverage with jest
-      run: |
-        cd erp
-        npm install
-        npm test
-      shell: bash
+      uses: stefanoeb/jest-action@1.0.3
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
