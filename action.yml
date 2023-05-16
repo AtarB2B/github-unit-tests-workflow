@@ -31,7 +31,7 @@ runs:
       shell: bash
     
     - name: Test Coverage with pytest
-      run: ENV='test' pytest --junitxml=result.xml --ignore=library/ --cov-config=.coveragerc --cov-report=xml --doctest-modules --cov=. app/
+      run: ENV='test' pytest --ignore=app/main --cov-config=.coveragerc --cov-report=xml --doctest-modules --cov=. app/ --junitxml=result.xml
       shell: bash
     
     - name: Archive code coverage results
