@@ -12,9 +12,16 @@ runs:
       with:
         php-version: '8.1'
 
-    - uses: 'ramsey/composer-install@v2'
+    - uses: ramsey/composer-install@v2
       name: Install Composer & Dependencies
-      
+    
+    - run: |
+        >.env
+        for var in $(compgen -v | grep -Ev '^(BASH)'); do
+            var_fixed=$(printf "%s" "${!var}" | tr -d '\n' )
+            echo "$var=${var_fixed}" >>.env
+        done
+      shell: bash
     - name: PHPUnit Tests
       uses: php-actions/phpunit@v3
       env:
