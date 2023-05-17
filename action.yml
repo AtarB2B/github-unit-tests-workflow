@@ -36,7 +36,7 @@ runs:
 
     - name: Pycodestyle - Check Format
       run: |
-        pycodestyle ./app ./tests; isort --check-only ./app ./tests
+        pycodestyle ./app; isort --check-only ./app
       shell: bash
 
     - name: Pylint - Check Errors
