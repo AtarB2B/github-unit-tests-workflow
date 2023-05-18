@@ -12,10 +12,6 @@ runs:
       run: |
         npm install
         npm run ci
-        pwd
-        ls
-        ls ../
-        ls coverage/
       shell: bash
       working-directory: erp
     
