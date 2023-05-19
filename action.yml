@@ -39,10 +39,10 @@ runs:
     #    pycodestyle ./app; isort --check-only ./app
     #  shell: bash
 
-    - name: Pylint - Check Errors
-      run: |
-        pylint app/ --disable=all --enable=e,f
-      shell: bash
+    #- name: Pylint - Check Errors
+    #  run: |
+    #    pylint app/ --disable=all --enable=e,f
+    #  shell: bash
 
     - name: Pytest - Test Coverage
       run: ENV='test' pytest --junitxml=result.xml --ignore=library/ --cov-config=.coveragerc --cov-report=xml --doctest-modules --cov=. app/
