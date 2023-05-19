@@ -17,6 +17,7 @@ runs:
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
+      working-directory: erp
       with:
         name: code-coverage-report
         path: coverage/lcov.info
