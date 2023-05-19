@@ -10,11 +10,10 @@ runs:
     - name: Test Coverage with jest
       continue-on-error: true
       run: |
-        cd erp
         npm install
-        npm run test .
+        npm run ci .
       shell: bash
-      # working-directory: erp
+      working-directory: erp
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
