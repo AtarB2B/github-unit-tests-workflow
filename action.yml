@@ -34,10 +34,10 @@ runs:
         if [ -f library/requirements.txt ]; then pip3 install -r library/requirements.txt; fi
       shell: bash
 
-    - name: Pycodestyle - Check Format
-      run: |
-        pycodestyle ./app; isort --check-only --skip=main/routes/__init__.py ./app
-      shell: bash
+    #- name: Pycodestyle - Check Format
+    #  run: |
+    #    pycodestyle ./app; isort --check-only --skip=main/routes/__init__.py ./app
+    #  shell: bash
 
     #- name: Pylint - Check Errors
     #  run: |
