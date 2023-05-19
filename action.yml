@@ -10,6 +10,7 @@ runs:
     - name: Test Coverage with jest
       continue-on-error: true
       run: |
+        cd erp
         npm install
         npm run test .
       shell: bash
