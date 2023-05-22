@@ -13,7 +13,7 @@ runs:
         npm install
         npm run ci .
       shell: bash
-      working-directory: erp
+      # working-directory: erp
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
