@@ -26,7 +26,7 @@ runs:
         docker run \
           --rm \
           -e SONAR_HOST_URL="http://sonarcloud.io" \
-          -e SONAR_LOGIN="$SONAR_TOKEN" \
+          -e SONAR_LOGIN="7e46568cf99751eaee7b5a98824e211c10e47a46" \
           -v "$(pwd):/usr/src" \
           sonarsource/sonar-scanner-cli \
           -Dsonar.organization=atarb2b \
