@@ -23,8 +23,20 @@ runs:
 
     - name: SonarCloud
       run: |
-        npm install express jest sonarqube-scanner
-        npm run sonar
+        docker run \
+          --rm \
+          -e SONAR_HOST_URL="http://sonarcloud.io" \
+          -e SONAR_LOGIN="$SONAR_TOKEN" \
+          -v "$(pwd):/usr/src" \
+          sonarsource/sonar-scanner-cli \
+          -Dsonar.organization=atarb2b \
+          -Dsonar.projectKey=AtarB2B_erp-frontend \
+          -Dsonar.sources=. \
+          -Dsonar.sourceEncoding=UTF-8 \
+          -Dsonar.exclusions="**/kendo*,package-lock.json" \
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+          -Dsonar.test=src \
+          -Dsonar.test.inclusions="src/**/*.spec.js, src/**/*.test.js"
       env:
         SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
       shell: bash
