@@ -15,28 +15,8 @@ runs:
       shell: bash
       # working-directory: erp
     
-    # - name: Archive code coverage results
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: code-coverage-report
-    #     path: coverage/lcov.info
-
-    - name: SonarCloud
-      run: |
-        docker run \
-          --rm \
-          -e SONAR_HOST_URL="http://sonarcloud.io" \
-          -e SONAR_LOGIN="7e46568cf99751eaee7b5a98824e211c10e47a46" \
-          -v "$(pwd):/usr/src" \
-          sonarsource/sonar-scanner-cli \
-          -Dsonar.organization=atarb2b \
-          -Dsonar.projectKey=AtarB2B_erp-frontend \
-          -Dsonar.sources=. \
-          -Dsonar.sourceEncoding=UTF-8 \
-          -Dsonar.exclusions="**/kendo*,package-lock.json" \
-          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-          -Dsonar.test=src \
-          -Dsonar.test.inclusions="src/**/*.spec.js, src/**/*.test.js"
-      env:
-        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
-      shell: bash
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage/lcov.info
