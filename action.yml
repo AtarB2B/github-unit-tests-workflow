@@ -19,4 +19,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
-        path: coverage/lcov.info
+        path: erp/coverage/lcov.info
