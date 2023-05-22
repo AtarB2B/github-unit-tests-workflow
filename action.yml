@@ -11,6 +11,7 @@ runs:
       continue-on-error: true
       run: |
         npm install
+        npm install jest
         npm run ci .
       shell: bash
       working-directory: erp
