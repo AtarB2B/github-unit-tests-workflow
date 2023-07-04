@@ -16,11 +16,6 @@ runs:
         python-version: "3.10"
         cache: "pip"
 
-     - name: Check format
-       run: |
-         pycodestyle ./app; isort --check-only ./app
-       shell: bash
-
     - name: Update Library
       uses: AtarB2B/github-library-workflow@main
       with:
@@ -34,15 +29,15 @@ runs:
         if [ -f library/requirements.txt ]; then pip3 install -r library/requirements.txt; fi
       shell: bash
 
-    #- name: Pycodestyle - Check Format
-    #  run: |
-    #    pycodestyle ./app; isort --check-only --skip=main/routes/__init__.py ./app
-    #  shell: bash
+    - name: Pycodestyle - Check Format
+     run: |
+       pycodestyle ./app; isort --check-only --skip=main/routes/__init__.py ./app
+     shell: bash
 
-    #- name: Pylint - Check Errors
-    #  run: |
-    #    pylint app/ --disable=all --enable=e,f
-    #  shell: bash
+    - name: Pylint - Check Errors
+     run: |
+       pylint app/ --disable=all --enable=e,f
+     shell: bash
 
     - name: Pytest - Test Coverage
       run: ENV='test' pytest --junitxml=result.xml --ignore=library/ --cov-config=.coveragerc --cov-report=xml --doctest-modules --cov=. test/
