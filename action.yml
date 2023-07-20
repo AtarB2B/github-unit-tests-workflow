@@ -19,15 +19,19 @@ runs:
         mkdir ~/.ssh && touch ~/.ssh/known_hosts
         eval $(ssh-agent) && ssh-add ssh-rsa.key
         ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-      shell: bash
 
-    - name: Test Coverage with jest
-      continue-on-error: true
-      run: |
         npm install
         npm run ci .
-      shell: bash
       working-directory: src
+      shell: bash
+
+    # - name: Test Coverage with jest
+    #   continue-on-error: true
+    #   run: |
+    #     npm install
+    #     npm run ci .
+    #   shell: bash
+    #   working-directory: src
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
