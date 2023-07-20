@@ -11,17 +11,12 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
-      with:
-        persist-credentials: false
 
-    - name: Reconfigure git to use HTTP authentication
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-      shell: bash
-
-    - name: Update Library
+    - name: Config ssh-key
       run: |
+        chown -R $(id -u):$(id -g) $PWD
+        git config user.name "GitHub Actions Bot"
+        git config user.email "devops@atarb2b.com"
         echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
         chmod 400 ssh-rsa.key
         mkdir ~/.ssh && touch ~/.ssh/known_hosts
