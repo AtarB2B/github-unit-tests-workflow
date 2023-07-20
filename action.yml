@@ -2,10 +2,24 @@ name: Run Unit Tests
 
 description: Run Unit Tests
 
+inputs:
+  SSH_PRIV_KEY_LIBRARY:
+    required: true
+    description: SSH_PRIV_KEY_LIBRARY
+
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+
+    - name: Update Library
+      run: |
+        echo "${{ inputs.SSH_PRIV_KEY_LIBRARY }}" > ssh-rsa.key
+        chmod 400 ssh-rsa.key
+        mkdir ~/.ssh && touch ~/.ssh/known_hosts
+        eval $(ssh-agent) && ssh-add ssh-rsa.key
+        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      shell: bash
 
     - name: Test Coverage with jest
       continue-on-error: true
