@@ -22,7 +22,7 @@ runs:
 
         npm install
         npm run ci .
-      working-directory: src
+      # working-directory: src
       shell: bash
 
     # - name: Test Coverage with jest
