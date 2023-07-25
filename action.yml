@@ -2,6 +2,8 @@ name: Run Unit Tests
 
 description: Run Unit Tests
 
+
+
 inputs:
   SSH_PRIV_KEY_LIBRARY:
     required: true
@@ -16,16 +18,14 @@ runs:
         python-version: "3.10"
         cache: "pip"
 
-    # - name: Update Library
-    #   uses: AtarB2B/github-library-workflow@main
-    #   with:
-    #     SSH_PRIV_KEY_LIBRARY: ${{ inputs.SSH_PRIV_KEY_LIBRARY }}
+    - name: Update Library
+      uses: AtarB2B/github-library-workflow@main
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov
-        if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-      shell: bash
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov 
+    #     if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+    #   shell: bash
 
     #- name: Pycodestyle - Check Format
     #  run: |
