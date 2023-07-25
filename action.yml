@@ -29,6 +29,10 @@ runs:
         ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       shell: bash
 
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
     - run: |
         rm .npmrc
         echo @atarb2b:https://npm.pkg.github.com/ > .npmrc
