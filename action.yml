@@ -36,6 +36,7 @@ runs:
 
     - name: Test Coverage
       run: |
+        npm install @atarb2b/atar-fe-cli@0.1.0
         npm install
         npm run ci .
       env:
