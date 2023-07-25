@@ -22,20 +22,23 @@ runs:
         python-version: "3.10"
         cache: "pip"
 
-    - name: Update Library
-      if: ${{ inputs.USE_LIBRARY == 'true' }}
-      uses: AtarB2B/github-library-workflow@main
-      with:
-        SSH_PRIV_KEY_LIBRARY: ${{ inputs.SSH_PRIV_KEY_LIBRARY }}
+      - name: Update Library
+        uses: AtarB2B/github-library-workflow@main
 
-    - name: Install dependencies
-      # if: ${{ inputs.USE_LIBRARY == 'true' }}
-      run: |
-        python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov
-        if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-        if [ -f development/requirements.txt ]; then pip3 install -r development/requirements.txt; fi
-        if [ -f library/requirements.txt ]; then pip3 install -r library/requirements.txt; fi
-      shell: bash
+    # - name: Update Library
+    #   if: ${{ inputs.USE_LIBRARY == 'true' }}
+    #   uses: AtarB2B/github-library-workflow@main
+    #   with:
+    #     SSH_PRIV_KEY_LIBRARY: ${{ inputs.SSH_PRIV_KEY_LIBRARY }}
+
+    # - name: Install dependencies
+    #   # if: ${{ inputs.USE_LIBRARY == 'true' }}
+    #   run: |
+    #     python -m pip install --upgrade pip ; pip3 install pylint pytest faker coverage pytest-cov
+    #     if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+    #     if [ -f development/requirements.txt ]; then pip3 install -r development/requirements.txt; fi
+    #     if [ -f library/requirements.txt ]; then pip3 install -r library/requirements.txt; fi
+    #   shell: bash
 
     # - name: Pycodestyle - Check Format
     #   run: |
