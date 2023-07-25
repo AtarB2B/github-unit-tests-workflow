@@ -6,9 +6,6 @@ inputs:
   SSH_PRIV_KEY_LIBRARY:
     required: true
     description: SSH_PRIV_KEY_LIBRARY
-  ARTIFACT_CREDENTIALS:
-    required: true
-    description: ARTIFACT_CREDENTIALS
 
 runs:
   using: "composite"
@@ -21,8 +18,6 @@ runs:
 
     - name: Update Library
       uses: AtarB2B/github-library-workflow@main
-      with:
-        ARTIFACT_CREDENTIALS: ${ARTIFACT_CREDENTIALS}
 
     # - name: Install dependencies
     #   run: |
