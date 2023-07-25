@@ -6,6 +6,9 @@ inputs:
   SSH_PRIV_KEY_TOOLING:
     required: true
     description: SSH_PRIV_KEY_TOOLING
+  GITHUB_TOKEN:
+    required: true
+    description: Github Token
 
 runs:
   using: "composite"
@@ -26,12 +29,18 @@ runs:
         ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       shell: bash
 
+    - run: |
+        echo @atarb2b:https://npm.pkg.github.com/ > .npmrc
+        echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> .npmrc
+      shell: bash
+
     - name: Test Coverage
       run: |
         npm install
         npm run ci .
+      env:
+          NPM_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       shell: bash
-      # working-directory: src
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
