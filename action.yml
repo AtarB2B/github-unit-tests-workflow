@@ -3,51 +3,41 @@ name: Run Unit Tests
 description: Run Unit Tests
 
 inputs:
-  SSH_PRIV_KEY_TOOLING:
+  ATAR_PROJECT:
     required: true
-    description: SSH_PRIV_KEY_TOOLING
-  GITHUB_TOKEN:
+    description: ""
+  ATAR_CREDENTIALS:
     required: true
-    description: Github Token
+    description: ""
+  ARTIFACT_LOCATION:
+    required: true
+    description: ""
 
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
 
-    - name: Config ssh-key
-      run: |
-        chown -R $(id -u):$(id -g) $PWD
-        
-        git config user.name "GitHub Actions Bot"
-        git config user.email "devops@atarb2b.com"
-
-        echo "${{ inputs.SSH_PRIV_KEY_TOOLING }}" > ssh-rsa.key
-        chmod 400 ssh-rsa.key
-        mkdir ~/.ssh && touch ~/.ssh/known_hosts
-        eval $(ssh-agent) && ssh-add ssh-rsa.key
-        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-      shell: bash
-
     - uses: actions/setup-node@v3
       with:
         node-version: '16.x'
+        registry-url: 'https://npm.pkg.github.com'
 
-    - run: |
-        rm .npmrc
-        echo @atarb2b:https://npm.pkg.github.com/ > .npmrc
-        echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> .npmrc
-        npm install @atarb2b/atar-fe-cli@0.1.0
-      env:
-          NPM_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+    - name: Install dependencies
+      run: |
+        echo ${{ inputs.ATAR_CREDENTIALS }}|gcloud auth activate-service-account --key-file=-
+        echo @atarb2b:registry=https://${{ inputs.ARTIFACT_LOCATION }}-npm.pkg.dev/${{ inputs.ATAR_PROJECT }}/atar-fe-cli/ > .npmrc
+        echo '//${{ inputs.ARTIFACT_LOCATION }}-npm.pkg.dev/${{ inputs.ATAR_PROJECT }}/atar-fe-cli/:always-auth=true' >> .npmrc
+        npx google-artifactregistry-auth --repo-config=.npmrc --credential-config=.npmrc
+        npm install
       shell: bash
 
-    # - name: Test Coverage
-    #   run: |
-    #     npm install
-    #     npm run ci .
-    #   shell: bash
-    
+    - run: npm run ci
+      shell: bash
+
+    - run: npm run build
+      shell: bash
+
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
