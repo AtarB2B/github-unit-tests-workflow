@@ -2,16 +2,16 @@ name: Run Unit Tests
 
 description: Run Unit Tests
 
-inputs:
-  ATAR_PROJECT:
-    required: true
-    description: ""
-  ATAR_CREDENTIALS:
-    required: true
-    description: ""
-  ARTIFACT_LOCATION:
-    required: true
-    description: ""
+# inputs:
+#   ATAR_PROJECT:
+#     required: true
+#     description: ""
+#   ATAR_CREDENTIALS:
+#     required: true
+#     description: ""
+#   ARTIFACT_LOCATION:
+#     required: true
+#     description: ""
 
 runs:
   using: "composite"
@@ -25,9 +25,9 @@ runs:
 
     - name: Install dependencies
       run: |
-        echo ${{ inputs.ATAR_CREDENTIALS }}|gcloud auth activate-service-account --key-file=-
-        echo @atarb2b:registry=https://${{ inputs.ARTIFACT_LOCATION }}-npm.pkg.dev/${{ inputs.ATAR_PROJECT }}/atar-fe-cli/ > .npmrc
-        echo '//${{ inputs.ARTIFACT_LOCATION }}-npm.pkg.dev/${{ inputs.ATAR_PROJECT }}/atar-fe-cli/:always-auth=true' >> .npmrc
+        echo $ATAR_CREDENTIALS|gcloud auth activate-service-account --key-file=-
+        echo @atarb2b:registry=https://${ARTIFACT_LOCATION}-npm.pkg.dev/${ATAR_PROJECT}/atar-fe-cli/ > .npmrc
+        echo '//${ARTIFACT_LOCATION}-npm.pkg.dev/${ATAR_PROJECT}/atar-fe-cli/:always-auth=true' >> .npmrc
         npx google-artifactregistry-auth --repo-config=.npmrc --credential-config=.npmrc
         npm install
       shell: bash
