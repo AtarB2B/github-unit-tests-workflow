@@ -6,9 +6,6 @@ inputs:
   TESTS_PATCH:
     required: true
     description: TESTS_PATCH
-  ATARB2B_API_CREDENTIALS_PROD:
-    required: true
-    description: ATARB2B_API_CREDENTIALS_PROD
 
 runs:
   using: "composite"
@@ -18,17 +15,6 @@ runs:
       with:
         python-version: "3.10"
         cache: "pip"
-      
-    # - name: Update Library
-    #   uses: AtarB2B/github-library-workflow@main
-
-    - name: Update Library
-      run: |
-        echo ${{ inputs.ATARB2B_API_CREDENTIALS_PROD }}
-        python -m pip install --upgrade pip ; pip3 install pylint pytest pytest-mock faker coverage pytest-cov keyring keyrings.google-artifactregistry-auth
-        echo ${{ inputs.ATARB2B_API_CREDENTIALS_PROD }}|gcloud auth activate-service-account --key-file=-
-        if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-      shell: bash
 
     - name: Pylint - Check Errors
       run: |
