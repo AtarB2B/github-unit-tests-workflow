@@ -26,7 +26,7 @@ runs:
       run: |
         echo ${{ inputs.ATARB2B_API_CREDENTIALS_PROD }}
         python -m pip install --upgrade pip ; pip3 install pylint pytest pytest-mock faker coverage pytest-cov keyring keyrings.google-artifactregistry-auth
-        echo $ATARB2B_API_CREDENTIALS_PROD|gcloud auth activate-service-account --key-file=-
+        echo ${{ inputs.ATARB2B_API_CREDENTIALS_PROD }}|gcloud auth activate-service-account --key-file=-
         if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
       shell: bash
 
